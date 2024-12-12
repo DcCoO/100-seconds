@@ -120,7 +120,7 @@ public class SpawnController : MonoBehaviour
     {
         for (int i = 0; i < _spawnCount; i++)
         {
-            var spawnChance = SpawnSettings[i].GetSpawnChanceAtSeconds(second);
+            var spawnChance = SpawnSettings[i].GetSpawnChance(second);
             _spawnTimestamps[i] = new SpawnTimestamp(i, Random.value < spawnChance ? Random.value : float.MaxValue);
         }
         
@@ -137,12 +137,14 @@ public class SpawnController : MonoBehaviour
         
         // Check if another instance of the same enemy can be spawned
         if (queue.Count >= spawnSettings.MaxInstancesOnScreen) return;
+        print($"Adicionando inimigo {enemyID}, ja tem {queue.Count}");
 
         var fromPool = TryGetEnemy(spawnSettings, out var enemy);
         queue.Enqueue(enemy);
         var position = GetRandomPointOnBorder();
         if (fromPool) enemy.OnRespawn(position);
         else enemy.OnSpawn(position);
+        
     }
     
     /// <summary>Returns true if the enemy was taken from the pool, otherwise Instantiate it and return false.</summary>
@@ -160,9 +162,24 @@ public class SpawnController : MonoBehaviour
 
     private void RemoveEnemyFromGame(Enemy enemy)
     {
-        _enemiesInGame[enemy.ID].Dequeue();
-        _enemiesPool[enemy.ID].Enqueue(enemy);
+        try
+        {
+            print($"Removendo inimigo {enemy.ID}, ja tem {_enemiesInGame[enemy.ID].Count}");
+            _enemiesInGame[enemy.ID].Dequeue();
+            _enemiesPool[enemy.ID].Enqueue(enemy);
+        }
+        catch (Exception e)
+        {
+            Debug.LogError($"AAAAAAAAAAAAAAAAA erro ao matar {enemy.ID}");
+        }
     }
+
+    /*private void DictToString()
+    {
+        string s = "[";
+        for (int i = 1; i < 10; ++i) s += $" ({i} : {_enemiesInGame[i].Count})  ";
+        print($"{s} )");
+    }*/
     
     private Vector2 GetRandomPointOnBorder()
     {
@@ -176,7 +193,9 @@ public class SpawnController : MonoBehaviour
         };
     }
 
-    private void Stop()
+    private void Stop() => Stop(0);
+    
+    private void Stop(int seconds)
     {
         IsSpawning = false;
         var enemies = _field.GetComponentsInChildren<Enemy>();

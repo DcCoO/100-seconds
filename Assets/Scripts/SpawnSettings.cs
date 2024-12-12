@@ -5,10 +5,12 @@ public class SpawnSettings : ScriptableObject
 {
     public Enemy EnemyPrefab;
     public int MaxInstancesOnScreen;
+    public AnimationCurve SpawnChance;
     [Range(0f, 1f)] public float[] ChanceAlongTime;
-    
-    public float GetSpawnChanceAtSeconds(float seconds)
+
+    public float GetSpawnChance(float seconds)
     {
-        return ChanceAlongTime[Mathf.FloorToInt(seconds)];
+        float t = seconds / 100f;
+        return SpawnChance.Evaluate(t);
     }
 }

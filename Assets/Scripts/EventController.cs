@@ -6,7 +6,7 @@ public class EventController : SingletonMonoBehaviour<EventController>
     public static event Action OnGameStart;
     public static event Action<int> OnSecondElapsed;
     public static event Action<Enemy> OnEnemyDestroyed;
-    public static event Action OnGameLost;
+    public static event Action<int> OnGameLost;
     public static event Action OnGameWon;
 
     public void StartGame()
@@ -27,12 +27,12 @@ public class EventController : SingletonMonoBehaviour<EventController>
         OnEnemyDestroyed?.Invoke(enemy);
     }
     
-    public void GameLost()
+    public void GameLost(int time)
     {
 #if UNITY_EDITOR
-        Print(nameof(GameLost), "Game has been lost!", Color.red);
+        Print(nameof(GameLost), $"Game has been lost after {time} sconds!", Color.red);
 #endif
-        OnGameLost?.Invoke();
+        OnGameLost?.Invoke(time);
     }
     
     public void GameWon()

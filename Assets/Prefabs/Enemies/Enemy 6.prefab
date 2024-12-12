@@ -101,10 +101,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id: 6
   _rigidbody2D: {fileID: 9079031613552093103}
-  _speed: 5
+  _speed: 4
   DeathTime: 0
   _lifetime: 4
-  Speed: 5
   MaxAngleChangePerFrame: 0
   _lookAtDirection: 1
 --- !u!50 &9079031613552093103

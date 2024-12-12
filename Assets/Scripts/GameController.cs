@@ -4,40 +4,41 @@ public class GameController : MonoBehaviour
 {
     [SerializeField] private GameObject _field;
 
-    [HideInInspector] public bool IsPlaying;
+    //[HideInInspector] public bool IsPlaying;
+
+    //private int _elapsedTime;
 
     private void OnEnable()
     {
         EventController.OnGameStart += OnGameStart;
-        EventController.OnGameLost += OnGameEnd;
-        EventController.OnGameWon += OnGameEnd;
+        EventController.OnGameLost += OnGameLost;
+        EventController.OnGameWon += OnGameWon;
+        //EventController.OnSecondElapsed += UpdateElapsedTime;
     }
     
     private void OnDisable()
     {
         EventController.OnGameStart -= OnGameStart;
-        EventController.OnGameLost -= OnGameEnd;
-        EventController.OnGameWon -= OnGameEnd;
+        EventController.OnGameLost -= OnGameLost;
+        EventController.OnGameWon -= OnGameWon;
+        //EventController.OnSecondElapsed -= UpdateElapsedTime;
     }
     
     private void OnGameStart()
     {
         _field.SetActive(true);
-        IsPlaying = true;
         Player.Instance.Setup();
     }
     
-    private void OnGameEnd()
+    private void OnGameWon()
     {
         _field.SetActive(false);
-        IsPlaying = false;
     }
-
-    private void Update()
+    
+    private void OnGameLost(int seconds)
     {
-        if (IsPlaying && Input.GetMouseButtonUp(0))
-        {
-            EventController.Instance.GameLost();
-        }
+        _field.SetActive(false);
     }
+    
+    //private void UpdateElapsedTime(int seconds) => _elapsedTime = seconds;
 }

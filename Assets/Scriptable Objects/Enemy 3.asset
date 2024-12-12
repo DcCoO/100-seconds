@@ -13,7 +13,49 @@ MonoBehaviour:
   m_Name: Enemy 3
   m_EditorClassIdentifier: 
   EnemyPrefab: {fileID: 2096623695168485741, guid: 91c0009c3907e55449502c88127f9f96, type: 3}
-  MaxInstancesOnScreen: 3
+  MaxInstancesOnScreen: 2
+  SpawnChance:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 4.843203
+      tangentMode: 69
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.11784654
+      value: 0.5707547
+      inSlope: 4.843203
+      outSlope: 0.23159063
+      tangentMode: 69
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.40820137
+      value: 0.63799816
+      inSlope: 0.23159063
+      outSlope: -0.9346055
+      tangentMode: 69
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0.0848999
+      inSlope: -0.9346055
+      outSlope: 0
+      tangentMode: 69
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   ChanceAlongTime:
   - 0
   - 1

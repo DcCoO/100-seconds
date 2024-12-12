@@ -102,10 +102,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id: 4
   _rigidbody2D: {fileID: 1860163276662831248}
-  _speed: 2
+  _speed: 1.8
   DeathTime: 0
   _lifetime: 5
-  Speed: 2
   MaxAngleChangePerFrame: 1
   _lookAtDirection: 0
 --- !u!111 &7661225653653413656
@@ -186,4 +185,4 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.1
+  m_Radius: 0.075

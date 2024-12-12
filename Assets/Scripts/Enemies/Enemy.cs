@@ -13,11 +13,6 @@ public abstract class Enemy : MonoBehaviour
     [SerializeField] protected float _speed;
     [HideInInspector] public float DeathTime;
     [SerializeField] private float _lifetime;
-    
-    protected virtual void OnDisable()
-    {
-        _eventController.EnemyDestroyed(this);
-    }
 
     protected virtual void FixedUpdate()
     {
