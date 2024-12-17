@@ -70,27 +70,27 @@ MonoBehaviour:
     ExtraInformation: Disabler
     TargetProgress: 1
   - Key: A11
-    Description: Win a game with Gu-Fonotin
+    Description: Win a game as Gu-Fonotin
     AchievementType: 2
     ExtraInformation: Default
     TargetProgress: 1
   - Key: A12
-    Description: Win a game with Wallymaru
+    Description: Win a game as Wallymaru
     AchievementType: 2
     ExtraInformation: Boundless
     TargetProgress: 1
   - Key: A13
-    Description: Win a game with Skeeposuke
+    Description: Win a game as Skeeposuke
     AchievementType: 2
     ExtraInformation: Teleport
     TargetProgress: 1
   - Key: A14
-    Description: Win a game with Buleh-kuhol
+    Description: Win a game as Buleh-kuhol
     AchievementType: 2
     ExtraInformation: Disabler
     TargetProgress: 1
   - Key: A15
-    Description: Win a game with Mao-Zen
+    Description: Win a game as Mao-Zen
     AchievementType: 2
     ExtraInformation: Mouse
     TargetProgress: 1
@@ -165,27 +165,27 @@ MonoBehaviour:
     ExtraInformation: 
     TargetProgress: 100
   - Key: A30
-    Description: play 10 times with Gu-Fonotin
+    Description: play 10 times as Gu-Fonotin
     AchievementType: 7
     ExtraInformation: Default
     TargetProgress: 10
   - Key: A31
-    Description: play 10 times with Wallymaru
+    Description: play 10 times as Wallymaru
     AchievementType: 7
     ExtraInformation: Boundless
     TargetProgress: 10
   - Key: A32
-    Description: play 10 times with Skeeposuke
+    Description: play 10 times as Skeeposuke
     AchievementType: 7
     ExtraInformation: Teleport
     TargetProgress: 10
   - Key: A33
-    Description: play 10 times with Mao-Zen
+    Description: play 10 times as Mao-Zen
     AchievementType: 7
     ExtraInformation: Mouse
     TargetProgress: 10
   - Key: A34
-    Description: play 10 times with Buleh-kuhol
+    Description: play 10 times as Buleh-kuhol
     AchievementType: 7
     ExtraInformation: Disabler
     TargetProgress: 10

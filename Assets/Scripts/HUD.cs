@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using System.IO;
 using TMPro;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -16,9 +18,10 @@ public class HUD : MonoBehaviour
     private static readonly DateTime _beginDate = new DateTime(2024, 12, 14);
     private const int _startUsers = 41593;
     private const float _newUsersPerSecond = 0.006f;
+
+    private int _score;
     
-    
-    
+    [SerializeField] private GameObject[] _shareButtons;
     [SerializeField] private GameObject _gameWonPanel;
     
     [SerializeField] private TMP_Text _newHighscoreText;
@@ -52,6 +55,7 @@ public class HUD : MonoBehaviour
     
     private void GameLost(int seconds, float exactTime)
     {
+        _score = seconds;
         _gameOverPanel.SetActive(true);
         _loseText.text = $"\"{_losePhrases[Random.Range(0, _losePhrases.Length)]}\"";
 
@@ -76,8 +80,44 @@ public class HUD : MonoBehaviour
     
     private void GameWon()
     {
+        _score = 100;
         _gameWonPanel.SetActive(true);
         _timeText.gameObject.SetActive(false);
         PlayerPrefs.SetInt(Menu.HighscoreKey, 100);
     }
+    
+    public void OnClickShare(bool win)
+    {
+        StartCoroutine(ShareScreenshotRoutine(win));
+    }
+
+    private IEnumerator ShareScreenshotRoutine(bool win)
+    {
+        foreach (var button in _shareButtons) button.SetActive(false);
+        
+        yield return new WaitForEndOfFrame();
+
+        Texture2D texture = new Texture2D(Screen.width, Screen.height, TextureFormat.RGB24, false);
+        texture.ReadPixels(new Rect(0, 0, Screen.width, Screen.height), 0, 0);
+        texture.Apply();
+
+        string path = Path.Combine(Application.temporaryCachePath, "Screenshot.png");
+        File.WriteAllBytes(path, texture.EncodeToPNG());
+
+        Destroy(texture);
+
+        if (win)
+        {
+            new NativeShare().AddFile(path).SetSubject("Come play 100 SECONDS.")
+                .SetText("It was easy for me, but can YOU do it?").Share();
+        }
+        else
+        {
+            new NativeShare().AddFile(path).SetSubject("Come play 100 SECONDS.")
+                .SetText($"Can you last more than {_score} seconds?").Share();
+        }
+        
+        foreach (var button in _shareButtons) button.SetActive(true);
+    }
+
 }

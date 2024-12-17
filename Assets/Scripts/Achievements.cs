@@ -19,10 +19,10 @@ public class Achievements : ScriptableObject
             }
         }
     }
+#endif
     
     public AchievementEntry[] Entries;
     
-#endif
     
     
 }
