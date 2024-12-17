@@ -104,8 +104,7 @@ MonoBehaviour:
   _rigidbody2D: {fileID: 1366853806714236200}
   _speed: 0.7
   DeathTime: 0
-  _lifetime: 5
-  Speed: 0.7
+  _lifetime: 4.5
   MaxAngleChangePerFrame: 2
   _lookAtDirection: 0
 --- !u!111 &7772689788126703272

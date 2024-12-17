@@ -35,7 +35,7 @@ public class GameController : MonoBehaviour
         _field.SetActive(false);
     }
     
-    private void OnGameLost(int seconds)
+    private void OnGameLost(int seconds, float exactTime)
     {
         _field.SetActive(false);
     }

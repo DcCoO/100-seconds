@@ -35,7 +35,7 @@ public abstract class Enemy : MonoBehaviour
         gameObject.SetActive(true);
     }
 
-    private void Die()
+    public void Die()
     {
         _eventController.EnemyDestroyed(this);
         gameObject.SetActive(false);

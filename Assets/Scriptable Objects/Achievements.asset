@@ -1,0 +1,211 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24bee9e9a6054384b8a16bc724ce1e5b, type: 3}
+  m_Name: Achievements
+  m_EditorClassIdentifier: 
+  GenerateIDs: 0
+  Entries:
+  - Key: A0
+    Description: Last 25 seconds
+    AchievementType: 0
+    ExtraInformation: 
+    TargetProgress: 25
+  - Key: A1
+    Description: Last 50 seconds
+    AchievementType: 0
+    ExtraInformation: 
+    TargetProgress: 50
+  - Key: A2
+    Description: Last 75 seconds
+    AchievementType: 0
+    ExtraInformation: 
+    TargetProgress: 75
+  - Key: A3
+    Description: Win once
+    AchievementType: 1
+    ExtraInformation: 
+    TargetProgress: 1
+  - Key: A4
+    Description: Win 3 times
+    AchievementType: 1
+    ExtraInformation: 
+    TargetProgress: 3
+  - Key: A5
+    Description: Win 5 times
+    AchievementType: 1
+    ExtraInformation: 
+    TargetProgress: 5
+  - Key: A6
+    Description: Win 10 times
+    AchievementType: 1
+    ExtraInformation: 
+    TargetProgress: 10
+  - Key: A7
+    Description: unlock Wallymaru
+    AchievementType: 3
+    ExtraInformation: Boundless
+    TargetProgress: 1
+  - Key: A8
+    Description: unlock Skeeposuke
+    AchievementType: 3
+    ExtraInformation: Teleport
+    TargetProgress: 1
+  - Key: A9
+    Description: unlock Mao-Zen
+    AchievementType: 3
+    ExtraInformation: Mouse
+    TargetProgress: 1
+  - Key: A10
+    Description: unlock Buleh-kuhol
+    AchievementType: 3
+    ExtraInformation: Disabler
+    TargetProgress: 1
+  - Key: A11
+    Description: Win a game with Gu-Fonotin
+    AchievementType: 2
+    ExtraInformation: Default
+    TargetProgress: 1
+  - Key: A12
+    Description: Win a game with Wallymaru
+    AchievementType: 2
+    ExtraInformation: Boundless
+    TargetProgress: 1
+  - Key: A13
+    Description: Win a game with Skeeposuke
+    AchievementType: 2
+    ExtraInformation: Teleport
+    TargetProgress: 1
+  - Key: A14
+    Description: Win a game with Buleh-kuhol
+    AchievementType: 2
+    ExtraInformation: Disabler
+    TargetProgress: 1
+  - Key: A15
+    Description: Win a game with Mao-Zen
+    AchievementType: 2
+    ExtraInformation: Mouse
+    TargetProgress: 1
+  - Key: A16
+    Description: Die once
+    AchievementType: 4
+    ExtraInformation: 
+    TargetProgress: 1
+  - Key: A17
+    Description: Die 5 times
+    AchievementType: 4
+    ExtraInformation: 
+    TargetProgress: 5
+  - Key: A18
+    Description: Die 10 times
+    AchievementType: 4
+    ExtraInformation: 
+    TargetProgress: 10
+  - Key: A19
+    Description: Die 50 times
+    AchievementType: 4
+    ExtraInformation: 
+    TargetProgress: 50
+  - Key: A20
+    Description: Die 100 times
+    AchievementType: 4
+    ExtraInformation: 
+    TargetProgress: 100
+  - Key: A21
+    Description: watch one ad
+    AchievementType: 5
+    ExtraInformation: 
+    TargetProgress: 1
+  - Key: A22
+    Description: watch 5 ads
+    AchievementType: 5
+    ExtraInformation: 
+    TargetProgress: 5
+  - Key: A23
+    Description: watch 10 ads
+    AchievementType: 5
+    ExtraInformation: 
+    TargetProgress: 10
+  - Key: A24
+    Description: watch 50 ads
+    AchievementType: 5
+    ExtraInformation: 
+    TargetProgress: 50
+  - Key: A25
+    Description: watch 100 ads
+    AchievementType: 5
+    ExtraInformation: 
+    TargetProgress: 100
+  - Key: A26
+    Description: play 1 time
+    AchievementType: 6
+    ExtraInformation: 
+    TargetProgress: 1
+  - Key: A27
+    Description: play 10 times
+    AchievementType: 6
+    ExtraInformation: 
+    TargetProgress: 10
+  - Key: A28
+    Description: play 50 times
+    AchievementType: 6
+    ExtraInformation: 
+    TargetProgress: 50
+  - Key: A29
+    Description: play 100 times
+    AchievementType: 6
+    ExtraInformation: 
+    TargetProgress: 100
+  - Key: A30
+    Description: play 10 times with Gu-Fonotin
+    AchievementType: 7
+    ExtraInformation: Default
+    TargetProgress: 10
+  - Key: A31
+    Description: play 10 times with Wallymaru
+    AchievementType: 7
+    ExtraInformation: Boundless
+    TargetProgress: 10
+  - Key: A32
+    Description: play 10 times with Skeeposuke
+    AchievementType: 7
+    ExtraInformation: Teleport
+    TargetProgress: 10
+  - Key: A33
+    Description: play 10 times with Mao-Zen
+    AchievementType: 7
+    ExtraInformation: Mouse
+    TargetProgress: 10
+  - Key: A34
+    Description: play 10 times with Buleh-kuhol
+    AchievementType: 7
+    ExtraInformation: Disabler
+    TargetProgress: 10
+  - Key: A35
+    Description: Use shield once
+    AchievementType: 8
+    ExtraInformation: 
+    TargetProgress: 1
+  - Key: A36
+    Description: Use shield 10 times
+    AchievementType: 8
+    ExtraInformation: 
+    TargetProgress: 10
+  - Key: A37
+    Description: Use shield 50 times
+    AchievementType: 8
+    ExtraInformation: 
+    TargetProgress: 50
+  - Key: A38
+    Description: Use shield 100 times
+    AchievementType: 8
+    ExtraInformation: 
+    TargetProgress: 100
