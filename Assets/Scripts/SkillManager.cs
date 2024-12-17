@@ -70,7 +70,7 @@ public class SkillManager : MonoBehaviour
             case ESkill.Mouse:
                 VFXController.Instance.Smoke(player.transform.position);
                 player.GetComponent<CircleCollider2D>().radius = _mouseColliderRadius;
-                player.GetComponent<TrailRenderer>().startWidth = _mouseTrailWidth;
+                player.GetComponent<TrailRenderer>().widthMultiplier = _mouseTrailWidth;
                 _skillEndTime = Time.time + _mouseDuration;
                 _isUsingSkill = true;
                 break;

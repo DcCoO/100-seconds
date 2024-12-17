@@ -12,8 +12,12 @@ public class AchievementManager : MonoBehaviour
 
     [SerializeField] private ScrollRect _scrollRect;
 
+    private int _originalFPS;
     private void OnEnable()
     {
+        _originalFPS = Application.targetFrameRate;
+        Application.targetFrameRate = 60;
+        
         foreach (var achievement in _achievements.Entries)
         {
             var achievementItem = Instantiate(_achievementPrefab, _content);
@@ -34,6 +38,8 @@ public class AchievementManager : MonoBehaviour
 
     private void OnDisable()
     {
+        Application.targetFrameRate = _originalFPS;
+        
         foreach (Transform child in _content)
         {
             Destroy(child.gameObject);

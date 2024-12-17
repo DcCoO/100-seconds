@@ -111,6 +111,7 @@ MonoBehaviour:
   _rotationSpeed: 10
   _maxSpeed: 1
   _trail: {fileID: 1302539368352525230}
+  _originalTrailWidth: 0.15
   _skillManager: {fileID: 8510029765628128824}
 --- !u!114 &8510029765628128824
 MonoBehaviour:
@@ -128,7 +129,6 @@ MonoBehaviour:
   _mouseCooldown: 5
   _originalColliderRadius: 0.065
   _mouseColliderRadius: 0.03
-  _originalTrailWidth: 0.15
   _mouseTrailWidth: 0.075
   _teleportCooldown: 3
   _disableDuration: 3

@@ -212,7 +212,7 @@ public class Player : SingletonMonoBehaviour<Player>
 
     public void ResetTrail()
     {
-        _trail.startWidth = _originalTrailWidth;
+        _trail.widthMultiplier = _originalTrailWidth;
     }
 
     private IEnumerator InvulnerableRoutine()
