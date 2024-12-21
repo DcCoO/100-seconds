@@ -5,6 +5,8 @@ public class EventController : SingletonMonoBehaviour<EventController>
 {
     public static event Action OnGameStart;
     public static event Action<int> OnSecondElapsed;
+    public static event Action<int> OnDodge;
+    public static event Action OnSkillUsed;
     public static event Action<Enemy> OnEnemyDestroyed;
     public static event Action<int, float> OnGameLost;
     public static event Action OnGameWon;
@@ -47,6 +49,16 @@ public class EventController : SingletonMonoBehaviour<EventController>
     public void AdWatched()
     {
         OnAdWatched?.Invoke();
+    }
+    
+    public void Dodge(int combo)
+    {
+        OnDodge?.Invoke(combo);
+    }
+    
+    public void SkillUsed()
+    {
+        OnSkillUsed?.Invoke();
     }
     
 #if UNITY_EDITOR

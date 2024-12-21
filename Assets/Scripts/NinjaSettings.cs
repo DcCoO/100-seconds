@@ -11,4 +11,5 @@ public class NinjaSettings : ScriptableObject
     public int RoundsToUnlock;
     public Gradient TrailColor;
     public ESkill Skill;
+    public int DodgesToChargeSkill;
 }

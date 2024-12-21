@@ -21,6 +21,8 @@ public class AchievementController : SingletonMonoBehaviour<AchievementControlle
         EventController.OnGameWon += OnGameWon;
         EventController.OnGameLost += OnGameLost;
         EventController.OnAdWatched += OnAdWatched;
+        EventController.OnDodge += OnDodge;
+        EventController.OnSkillUsed += OnSkillUsed;
     }
 
     private void OnDisable()
@@ -29,6 +31,8 @@ public class AchievementController : SingletonMonoBehaviour<AchievementControlle
         EventController.OnGameWon -= OnGameWon;
         EventController.OnGameLost -= OnGameLost;
         EventController.OnAdWatched -= OnAdWatched;
+        EventController.OnDodge -= OnDodge;
+        EventController.OnSkillUsed -= OnSkillUsed;
     }
 
     private void Initialize()
@@ -73,6 +77,16 @@ public class AchievementController : SingletonMonoBehaviour<AchievementControlle
     {
         UpdateAchievementProgress(EAchievementType.WatchAds, 1);
     }
+    
+    private void OnDodge(int combo)
+    {
+        UpdateAchievementProgress(EAchievementType.Dodge, 1);
+    }
+    
+    private void OnSkillUsed()
+    {
+        UpdateAchievementProgress(EAchievementType.UseSkill, 1);
+    }
 
 
 
@@ -88,7 +102,6 @@ public class AchievementController : SingletonMonoBehaviour<AchievementControlle
         var achievementByType = _achievementDictionary[type];
         foreach (var achievement in achievementByType)
         {
-            if (achievement.AchievementType == EAchievementType.PlayWithNinja) print($"AAAAAAAAAA {achievement.ExtraInformation} {extraInformation}");
             if (achievement.ExtraInformation != extraInformation) continue;
 
             if (compare)    // If we need to compare the progress with the TargetProgress instead of incrementing it

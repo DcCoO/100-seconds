@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ID: Mouse
   Name: Mao-Zen
-  Description: '"This ninja is a master of the ancient animal art. He can become
-    a mouse by tapping 2 times on the screen."'
+  Description: '"This ninja is a master of the cheese art. He can turn into a mouse
+    by tapping 2 times on the screen. This ability is charged after 5 dodges. If
+    the mouse spends 4 seconds without dodging, it returns to its human form."'
   AdsToUnlock: 15
   TimeToUnlock: 70
   RoundsToUnlock: 3
@@ -50,3 +51,4 @@ MonoBehaviour:
     m_NumColorKeys: 2
     m_NumAlphaKeys: 2
   Skill: 1
+  DodgesToChargeSkill: 5

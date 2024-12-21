@@ -47,5 +47,7 @@ public enum EAchievementType
     WatchAds,
     Play,
     PlayWithNinja,
-    UseShield
+    UseShield,
+    Dodge,
+    UseSkill
 }

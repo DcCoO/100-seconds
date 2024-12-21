@@ -61,15 +61,20 @@ public class Menu : SingletonMonoBehaviour<Menu>
         _mainCamera.orthographicSize = Mathf.Max(orthographicSize, Mathf.Max(osHeight, osWidth));
     }
     
-#if UNITY_EDITOR
+    //TODO: remove this
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.C))
         {
             UnlockAllSkins();
         }
+
+        if (Input.touchCount == 3)
+        {
+            UnlockAllSkins();
+        }
     }
-#endif
+
 
 
     public void WatchAdForShield()
@@ -147,7 +152,7 @@ public class Menu : SingletonMonoBehaviour<Menu>
         return false;
     }
     
-#if UNITY_EDITOR
+
     
     public void UnlockAllSkins()
     {
@@ -158,7 +163,7 @@ public class Menu : SingletonMonoBehaviour<Menu>
         }
     }
 
-#endif
+
     
 #endregion
 }

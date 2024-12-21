@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SkillManager : MonoBehaviour
@@ -9,7 +6,6 @@ public class SkillManager : MonoBehaviour
     private ESkill _currentSkill;
 
     [SerializeField] private float _mouseDuration;
-    [SerializeField] private float _mouseCooldown;
     [SerializeField] private float _originalColliderRadius;
     [SerializeField] private float _mouseColliderRadius;
     [SerializeField] private float _mouseTrailWidth;
@@ -20,6 +16,7 @@ public class SkillManager : MonoBehaviour
     [SerializeField] private float _disableCooldown;
 
     private bool _isUsingSkill;
+    public bool IsUsingSkill => _isUsingSkill;
     private float _skillEndTime;
     
     private void OnEnable()
@@ -27,6 +24,7 @@ public class SkillManager : MonoBehaviour
         Player.OnDoubleTap += OnDoubleTap;
         EventController.OnGameLost += OnGameLost;
         EventController.OnGameWon += OnGameWon;
+        EventController.OnDodge += OnDodge;
         _skillEndTime = 0;
     }
 
@@ -35,6 +33,7 @@ public class SkillManager : MonoBehaviour
         Player.OnDoubleTap -= OnDoubleTap;
         EventController.OnGameLost -= OnGameLost;
         EventController.OnGameWon -= OnGameWon;
+        EventController.OnDodge -= OnDodge;
     }
 
     private void Update()
@@ -57,7 +56,11 @@ public class SkillManager : MonoBehaviour
         if (_isUsingSkill) return;
         
         var player = Player.Instance;
+
+        if (!player.CanUseSkill) return;
+        
         player.Animator.SetBool(_usingSkill, true);
+        EventController.Instance.SkillUsed();
         
         switch (_currentSkill)
         {
@@ -79,6 +82,14 @@ public class SkillManager : MonoBehaviour
                 player.transform.position = tapWorldPosition;
                 player.ResetMovement();
                 break;
+        }
+    }
+
+    private void OnDodge(int combo)
+    {
+        if (_currentSkill == ESkill.Mouse)
+        {
+            _skillEndTime = Time.time + _mouseDuration;
         }
     }
 

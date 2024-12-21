@@ -209,3 +209,38 @@ MonoBehaviour:
     AchievementType: 8
     ExtraInformation: 
     TargetProgress: 100
+  - Key: A38
+    Description: Dodge a weapon once
+    AchievementType: 9
+    ExtraInformation: 
+    TargetProgress: 1
+  - Key: A38
+    Description: Dodge 10 weapons
+    AchievementType: 9
+    ExtraInformation: 
+    TargetProgress: 10
+  - Key: A38
+    Description: Dodge 100 weapons
+    AchievementType: 9
+    ExtraInformation: 
+    TargetProgress: 100
+  - Key: A38
+    Description: Dodge 1000 weapons
+    AchievementType: 9
+    ExtraInformation: 
+    TargetProgress: 1000
+  - Key: A38
+    Description: Use a skill once
+    AchievementType: 10
+    ExtraInformation: 
+    TargetProgress: 1000
+  - Key: A38
+    Description: Use 10 skills
+    AchievementType: 10
+    ExtraInformation: 
+    TargetProgress: 10
+  - Key: A38
+    Description: Use 100 skills
+    AchievementType: 9
+    ExtraInformation: 
+    TargetProgress: 100

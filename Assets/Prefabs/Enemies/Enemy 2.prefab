@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7461788820039399252}
   - component: {fileID: 5953433803825190403}
   - component: {fileID: 8430859510414831789}
+  - component: {fileID: 4308908677158112289}
   m_Layer: 7
   m_Name: Enemy 2
   m_TagString: Untagged
@@ -105,7 +106,9 @@ MonoBehaviour:
   _speed: 0.6
   DeathTime: 0
   _lifetime: 5
-  Speed: 0.6
+  _spriteRenderer: {fileID: 4707733344393306738}
+  _pulseDuration: 0.3
+  _pulseColor: {r: 0.35351673, g: 0.7058824, b: 0.07058821, a: 1}
   MaxAngleChangePerFrame: 0.8
   _lookAtDirection: 0
 --- !u!111 &7461788820039399252
@@ -186,3 +189,38 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.06
+--- !u!58 &4308908677158112289
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8422631283591450158}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.14

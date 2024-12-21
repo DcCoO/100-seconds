@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using TMPro;
 using UnityEngine;
 
 public class Player : SingletonMonoBehaviour<Player>
@@ -9,6 +10,7 @@ public class Player : SingletonMonoBehaviour<Player>
     [SerializeField] private Rigidbody2D _rigidbody2D;
     [SerializeField] private GameObject _shield;
     [SerializeField] private Animator _animator;
+    
     public Animator Animator => _animator;
     private Transform _transform;
     [SerializeField] private float _rotationSpeed;
@@ -16,6 +18,8 @@ public class Player : SingletonMonoBehaviour<Player>
     [SerializeField] private TrailRenderer _trail;
     [SerializeField] private float _originalTrailWidth;
     [SerializeField] private SkillManager _skillManager;
+    [SerializeField] private GameObject _skillParticle;
+    [SerializeField] private DodgeController _dodgeController;
 
     private bool _moreThanOneTouch;
     
@@ -25,6 +29,8 @@ public class Player : SingletonMonoBehaviour<Player>
     
     private bool _hasShield;
     private bool _isInvulnerable;
+    private bool _isDead;
+    public bool IsDead => _isDead;
     
     public const string ShieldKey = "Shield";
 
@@ -35,22 +41,32 @@ public class Player : SingletonMonoBehaviour<Player>
     public static event Action<Vector2> OnDoubleTap;
     private float _lastTapTime;
     private const float _doubleTapMaxDelay = 0.25f;
+    
+    // Dodge & Skill
+    private bool _canUseSkill;
+    public bool CanUseSkill => _canUseSkill;
+    private int _comboWhenUsedSkill;
 
     private void OnEnable()
     {
         EventController.OnGameLost += OnGameLost;
         EventController.OnGameWon += OnGameWon;
+        EventController.OnDodge += OnDodge;
+        EventController.OnSkillUsed += OnSkillUsed;
 
         _skin = Menu.Instance.GetSelectedSkin();
         _trail.colorGradient = _skin.TrailColor;
         _animator.SetTrigger(_skin.ID);
         _skillManager.SetSkill(_skin.Skill);
+        _isDead = false;
     }
     
     private void OnDisable()
     {
         EventController.OnGameLost -= OnGameLost;
         EventController.OnGameWon -= OnGameWon;
+        EventController.OnDodge -= OnDodge;
+        EventController.OnSkillUsed -= OnSkillUsed;
     }
     
     public void SetLimits(Transform bottomLeft, Transform topRight)
@@ -73,6 +89,9 @@ public class Player : SingletonMonoBehaviour<Player>
         _shield.SetActive(_hasShield);
         _transform.rotation = Quaternion.identity;
         _animator.speed = 0;
+        _comboWhenUsedSkill = 0;
+        _canUseSkill = false;
+        _skillParticle.SetActive(false);
         _trail.Clear();
         ResetTrail();
     }
@@ -88,11 +107,32 @@ public class Player : SingletonMonoBehaviour<Player>
         PlayerPrefs.SetInt(ShieldKey, 0);
     }
     
+    private void OnDodge(int combo)
+    {
+        if (_skin.DodgesToChargeSkill <= 0) return;
+        if (_skillManager.IsUsingSkill)
+        {
+            _comboWhenUsedSkill = combo;
+            return;
+        }
+        int realCombo = combo - _comboWhenUsedSkill;
+        if (realCombo < _skin.DodgesToChargeSkill) return;
+        _canUseSkill = true;
+        _skillParticle.SetActive(true);
+    }
+    
+    private void OnSkillUsed()
+    {
+        _canUseSkill = false;
+        _comboWhenUsedSkill = _dodgeController.ComboCount;
+        _skillParticle.SetActive(false);
+    }
+    
     private void Update()
     {
         Vector2 startPosition = _transform.position;
         Vector2 nextPosition = startPosition;
-
+        
 #if UNITY_EDITOR
         if (Input.GetMouseButtonDown(0))
         {
@@ -184,6 +224,9 @@ public class Player : SingletonMonoBehaviour<Player>
 #if UNITY_EDITOR
         if (Input.GetKey(KeyCode.A)) return;
 #endif
+        if (other.isTrigger) return;
+        
+        print($"DIED! {other.gameObject.name} {other.gameObject.GetComponent<SpriteRenderer>().color}" );
         TakeHit();
     }
 
@@ -199,6 +242,7 @@ public class Player : SingletonMonoBehaviour<Player>
         }
         else
         {
+            _isDead = true;
             EventController.Instance.GameLost(SpawnController.Instance.ElapsedTime, SpawnController.Instance.ExactElapsedTime);
         }
     }
