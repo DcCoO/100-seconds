@@ -32,6 +32,7 @@ public class AchievementEntry
 {
     public string Key;
     public string Description;
+    public string DescriptionLocKey;
     public EAchievementType AchievementType;
     public string ExtraInformation;
     public int TargetProgress;
@@ -49,5 +50,6 @@ public enum EAchievementType
     PlayWithNinja,
     UseShield,
     Dodge,
-    UseSkill
+    UseSkill,
+    DodgeCombo
 }

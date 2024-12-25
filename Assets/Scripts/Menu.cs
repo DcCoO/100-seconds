@@ -8,20 +8,23 @@ public class Menu : SingletonMonoBehaviour<Menu>
     public const string SelectedSkin = "SelectedSkin";
 
     
-    [SerializeField] private TMP_Text _highscoreText;
+    [SerializeField] private LocalizedText _highscoreLocText;
     [SerializeField] private Camera _mainCamera;
     [SerializeField] private Transform _logo;
     [SerializeField] private Transform _logoAnchor;
     [SerializeField] private GameObject _shieldPanel;
-
-    [SerializeField] private AudioSource _audioSource;
     
     [SerializeField] private NinjaSettings[] _skins;
     [SerializeField] private Animator _previewAnimator;
+
+    [SerializeField] private FTUEPanel _ftuePanel;
+    [SerializeField] private Transform _ftueParent;
+    [SerializeField] private GameObject _game;
+    [SerializeField] private GameObject _field;
     
     private void OnEnable()
     {
-        _highscoreText.text = $"Highscore: {PlayerPrefs.GetInt(HighscoreKey, 0)}";
+        _highscoreLocText.RefreshParameters(0, PlayerPrefs.GetInt(HighscoreKey, 0));
         if (AdsManager.Instance != null) _shieldPanel.SetActive(AdsManager.Instance.IsRewardedAdLoaded() && PlayerPrefs.GetInt(Player.ShieldKey, 0) == 0);
 
         _previewAnimator.SetTrigger(GetSelectedSkinID());
@@ -32,7 +35,6 @@ public class Menu : SingletonMonoBehaviour<Menu>
 
     private void Start()
     {
-        _audioSource.mute = PlayerPrefs.GetInt("MusicKey", 1) == 0;
         SetupCamera();
         _logo.position = (Vector2) _mainCamera.ScreenToWorldPoint(_logoAnchor.position);
         InitPlayerPrefs();
@@ -75,10 +77,29 @@ public class Menu : SingletonMonoBehaviour<Menu>
         }
     }
 
-
+    public void OnTapPlay()
+    {
+        if (GetFTUE())
+        {
+            Instantiate(_ftuePanel, _ftueParent).Setup(OnTapPlay);
+        }
+        else
+        {
+            gameObject.SetActive(false);
+            _game.SetActive(true);
+            _field.SetActive(true);
+            EventController.Instance.StartGame();
+        }
+    }
 
     public void WatchAdForShield()
     {
+        if (GetNoAds())
+        {
+            PlayerPrefs.SetInt(Player.ShieldKey, 1);
+            _shieldPanel.SetActive(false);
+            return;
+        }
         AdsManager.Instance.ShowRewardedAd(() =>
         {
             PlayerPrefs.SetInt(Player.ShieldKey, 1);
@@ -100,7 +121,6 @@ public class Menu : SingletonMonoBehaviour<Menu>
         }
     }
 
-
     public NinjaSettings GetSelectedSkin()
     {
         var skinID = PlayerPrefs.GetString(SelectedSkin);
@@ -108,6 +128,17 @@ public class Menu : SingletonMonoBehaviour<Menu>
     }
     
 #region Player Prefs
+
+    private bool GetFTUE()
+    {
+        return PlayerPrefs.GetInt("FTUE", 1) == 1;
+    }
+
+    public static void SetFTUE()
+    {
+        PlayerPrefs.SetInt("FTUE", 0);
+    }
+
 
     // Each ninja has to store the rounds left
 
@@ -147,12 +178,21 @@ public class Menu : SingletonMonoBehaviour<Menu>
 
     public static bool IsSkinAvailable(NinjaSettings skin)
     {
+        if (GetNoAds()) return true;
         if (GetRoundsLeft(skin.ID) <= 0) return true;
         if (GetAdsLeft(skin.ID) <= 0) return true;
         return false;
     }
-    
 
+    public static bool GetNoAds()
+    {
+        return PlayerPrefs.GetInt("NoAds", 0) == 1;
+    }
+
+    public static void SetNoAds(bool state)
+    {
+        PlayerPrefs.SetInt("NoAds", state ? 1 : 0);
+    }
     
     public void UnlockAllSkins()
     {
@@ -162,8 +202,7 @@ public class Menu : SingletonMonoBehaviour<Menu>
             SetAdsLeft(skin.ID, 0);
         }
     }
-
-
     
 #endregion
+
 }

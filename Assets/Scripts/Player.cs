@@ -87,6 +87,7 @@ public class Player : SingletonMonoBehaviour<Player>
         _positionOrigin = Vector2.zero;
         _hasShield = PlayerPrefs.GetInt(ShieldKey, 0) == 1;
         _shield.SetActive(_hasShield);
+        if (_hasShield) AudioManager.Instance.PlayShieldOn();
         _transform.rotation = Quaternion.identity;
         _animator.speed = 0;
         _comboWhenUsedSkill = 0;
@@ -201,11 +202,15 @@ public class Player : SingletonMonoBehaviour<Player>
         }
         
 #endif
-        _skillManager.EvaluateNextPosition(ref nextPosition, _bottomLeftLimit, _topRightLimit);
-        //nextPosition.x = Mathf.Clamp(nextPosition.x, _bottomLeftLimit.position.x, _topRightLimit.position.x);
-        //nextPosition.y = Mathf.Clamp(nextPosition.y, _bottomLeftLimit.position.y, _topRightLimit.position.y);
+        bool crossedWall = _skillManager.EvaluateNextPosition(ref nextPosition, _bottomLeftLimit, _topRightLimit);
         _transform.position = nextPosition;
-        
+        if (crossedWall)
+        {
+            _touchOrigin = _camera.ScreenToWorldPoint(Input.mousePosition);
+            _positionOrigin = _transform.position;
+            AudioManager.Instance.PlayBoundlessSkill();
+        }
+
         var direction = nextPosition - startPosition;
         var magnitude = direction.magnitude;
         var movementSpeed = magnitude / Time.deltaTime;
@@ -238,10 +243,12 @@ public class Player : SingletonMonoBehaviour<Player>
         {
             _hasShield = false;
             _shield.SetActive(false);
+            AudioManager.Instance.PlayShieldOff();
             StartCoroutine(InvulnerableRoutine());
         }
         else
         {
+            AudioManager.Instance.PlayDie();
             _isDead = true;
             EventController.Instance.GameLost(SpawnController.Instance.ElapsedTime, SpawnController.Instance.ExactElapsedTime);
         }

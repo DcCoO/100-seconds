@@ -13,7 +13,6 @@ public class SkillManager : MonoBehaviour
     [SerializeField] private float _teleportCooldown;
 
     [SerializeField] private float _disableDuration;
-    [SerializeField] private float _disableCooldown;
 
     private bool _isUsingSkill;
     public bool IsUsingSkill => _isUsingSkill;
@@ -66,12 +65,14 @@ public class SkillManager : MonoBehaviour
         {
             case ESkill.Disable:
                 VFXController.Instance.FieldSmoke();
+                AudioManager.Instance.PlayDisablerSkill();
                 SpawnController.Instance.Freeze(_disableDuration);
-                _skillEndTime = Time.time + _disableCooldown;
+                _skillEndTime = Time.time + _disableDuration;
                 _isUsingSkill = true;
                 break;
             case ESkill.Mouse:
                 VFXController.Instance.Smoke(player.transform.position);
+                AudioManager.Instance.PlayBecomeMouse();
                 player.GetComponent<CircleCollider2D>().radius = _mouseColliderRadius;
                 player.GetComponent<TrailRenderer>().widthMultiplier = _mouseTrailWidth;
                 _skillEndTime = Time.time + _mouseDuration;
@@ -79,6 +80,7 @@ public class SkillManager : MonoBehaviour
                 break;
             case ESkill.Teleport:
                 VFXController.Instance.Smoke(player.transform.position);
+                AudioManager.Instance.PlayTeleport();
                 player.transform.position = tapWorldPosition;
                 player.ResetMovement();
                 break;
@@ -93,31 +95,42 @@ public class SkillManager : MonoBehaviour
         }
     }
 
-    public void EvaluateNextPosition(ref Vector2 nextPosition, Transform bottomLeftLimit, Transform topRightLimit)
+    public bool EvaluateNextPosition(ref Vector2 nextPosition, Transform bottomLeftLimit, Transform topRightLimit)
     {
         if (_currentSkill == ESkill.Boundless)
         {
+            bool crossedWall = false;
             if (nextPosition.x < bottomLeftLimit.position.x)
             {
                 nextPosition.x = topRightLimit.position.x - (bottomLeftLimit.position.x - nextPosition.x) % (topRightLimit.position.x - bottomLeftLimit.position.x);
+                crossedWall = true;
             }
             else if (nextPosition.x > topRightLimit.position.x)
             {
                 nextPosition.x = bottomLeftLimit.position.x + (nextPosition.x - topRightLimit.position.x) % (topRightLimit.position.x - bottomLeftLimit.position.x);
+                crossedWall = true;
             }
             if (nextPosition.y < bottomLeftLimit.position.y)
             {
                 nextPosition.y = topRightLimit.position.y - (bottomLeftLimit.position.y - nextPosition.y) % (topRightLimit.position.y - bottomLeftLimit.position.y);
+                crossedWall = true;
             }
             else if (nextPosition.y > topRightLimit.position.y)
             {
                 nextPosition.y = bottomLeftLimit.position.y + (nextPosition.y - topRightLimit.position.y) % (topRightLimit.position.y - bottomLeftLimit.position.y);
+                crossedWall = true;
             }
+            
+            nextPosition.x = Mathf.Clamp(nextPosition.x, bottomLeftLimit.position.x, topRightLimit.position.x);
+            nextPosition.y = Mathf.Clamp(nextPosition.y, bottomLeftLimit.position.y, topRightLimit.position.y);
+            //if (crossedWall) AudioManager.Instance.PlayBoundlessSkill();
+            return crossedWall;
         }
         else
         {
             nextPosition.x = Mathf.Clamp(nextPosition.x, bottomLeftLimit.position.x, topRightLimit.position.x);
             nextPosition.y = Mathf.Clamp(nextPosition.y, bottomLeftLimit.position.y, topRightLimit.position.y);
+            return false;
         }
     }
     
@@ -147,7 +160,11 @@ public class SkillManager : MonoBehaviour
             case ESkill.Mouse:
                 player.GetComponent<CircleCollider2D>().radius = _originalColliderRadius;
                 player.ResetTrail();
-                if (!gameEnd) VFXController.Instance.Smoke(player.transform.position);
+                if (!gameEnd)
+                {
+                    AudioManager.Instance.PlayBecomeHuman();
+                    VFXController.Instance.Smoke(player.transform.position);
+                }
                 break;
             case ESkill.Teleport:
                 break;

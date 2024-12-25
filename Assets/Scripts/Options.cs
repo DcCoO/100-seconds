@@ -1,23 +1,31 @@
-using TMPro;
 using UnityEngine;
 
 public class Options : MonoBehaviour
 {
-    [SerializeField] private AudioSource _audioSource;
+    [SerializeField] private LocalizedText _musicLocText;
+    [SerializeField] private LocalizedText _sfxLocText;
 
-    [SerializeField] private TMP_Text _musicText;
-
+    [SerializeField] private GameObject _noAdsButton;
 
     private void OnEnable()
     {
-        var mute = PlayerPrefs.GetInt("MusicKey", 1) == 0;
-        _musicText.text = mute ? "music in off" : "music is on";
+        _musicLocText.ChangeKey(AudioManager.Instance.IsMusicOn() ? 1 : 0);
+        _sfxLocText.ChangeKey(AudioManager.Instance.IsSFXOn() ? 1 : 0);
+        _noAdsButton.SetActive(!Menu.GetNoAds());
     }
 
-    public void ToggleMusic()
+    public void ChangeMusicState()
     {
-        _audioSource.mute = !_audioSource.mute;
-        _musicText.text = _audioSource.mute ? "music in off" : "music is on";
-        PlayerPrefs.SetInt("MusicKey", _audioSource.mute ? 0 : 1);
+        bool isOn = !AudioManager.Instance.IsMusicOn();
+        EventController.Instance.MusicStateChanged(isOn);
+        _musicLocText.ChangeKey(isOn ? 1 : 0);
+        
+    }
+    
+    public void ChangeSFXState()
+    {
+        bool isOn = !AudioManager.Instance.IsSFXOn();
+        EventController.Instance.SFXStateChanged(isOn);
+        _sfxLocText.ChangeKey(isOn ? 1 : 0);
     }
 }

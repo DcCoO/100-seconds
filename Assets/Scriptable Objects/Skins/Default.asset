@@ -14,8 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ID: Default
   Name: Gu-Fonotin
-  Description: '"Newcomer ninja. Dresses like a ninja and moves like a ninja. He
-    overcomes his lack of talent with motivation and hard work."'
+  DescriptionLocKey: ninja_description_default
   AdsToUnlock: 0
   TimeToUnlock: 0
   RoundsToUnlock: 0
@@ -50,3 +49,5 @@ MonoBehaviour:
     m_NumColorKeys: 2
     m_NumAlphaKeys: 2
   Skill: 0
+  DodgesToChargeSkill: 0
+  SelectSound: {fileID: 8300000, guid: 1ab2fde87620cfc4ab1d3dbbd5590431, type: 3}

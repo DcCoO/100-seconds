@@ -1,0 +1,237 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17a499f0c779aca4892e9a621f60ea3f, type: 3}
+  m_Name: Localization Asset
+  m_EditorClassIdentifier: 
+  Data:
+    _serializedList:
+    - Key: play
+      Value:
+        _serializedList:
+        - Key: 10
+          Value: play
+        - Key: 28
+          Value: jogar
+    - Key: get_shield
+      Value:
+        _serializedList:
+        - Key: 10
+          Value: GET SHIELD
+        - Key: 28
+          Value: OBTER ESCUDO
+    - Key: ninjas
+      Value:
+        _serializedList:
+        - Key: 10
+          Value: ninjas
+        - Key: 28
+          Value: ninjas
+    - Key: achievements
+      Value:
+        _serializedList:
+        - Key: 10
+          Value: achievements
+        - Key: 28
+          Value: conquistas
+    - Key: options
+      Value:
+        _serializedList:
+        - Key: 10
+          Value: options
+        - Key: 28
+          Value: "op\xE7\xF5es"
+    - Key: highscore
+      Value:
+        _serializedList:
+        - Key: 10
+          Value: 'highscore: {0}'
+        - Key: 28
+          Value: 'melhor: {0}'
+    - Key: ftue
+      Value:
+        _serializedList:
+        - Key: 10
+          Value: '"This is the final test for you to become a true ninja.\Don''t
+            let any attack hit you.\Remember, dodging is more effective at the last
+            moment.\Can you stay alive for <color=#EED716>100 seconds</b><color=#ffffff>?"</b>\\-
+            Retsu dono, the eldest ninja master king of lords'
+        - Key: 28
+          Value: "\"Esse \xE9 seu exame final para se tornar um ninja de verdade.\\N\xE3o
+            deixe que nenhum ataque te acerte.\\Lembre-se que o melhor momento para
+            desviar \xE9 no fim.\\Voc\xEA consegue sobreviver por <color=#EED716>100
+            segundos</b><color=#ffffff>?\"</b>\\\\- Retsu dono, o ninja anci\xE3o
+            mestre rei dos lordes"
+    - Key: ninja_description_default
+      Value:
+        _serializedList:
+        - Key: 10
+          Value: '"Newcomer ninja. Dresses like a ninja and moves like a ninja. He
+            overcomes his lack of talent with motivation and hard work."'
+        - Key: 28
+          Value: "\"Ninja novato. Veste-se como ninja, move-se como ninja. Sua falta
+            de talento \xE9 compensada com motiva\xE7\xE3o e trabalho duro.\""
+    - Key: ninja_description_boundless
+      Value:
+        _serializedList:
+        - Key: 10
+          Value: '"This ninja is a master of the phantom art. He doesn''t leave trails
+            and can pass through walls."'
+        - Key: 28
+          Value: "\"Esse ninja \xE9 um mestre na arte fantasma. Ele n\xE3o deixa
+            rastros e consegue atravessar paredes.\""
+    - Key: ninja_description_disabler
+      Value:
+        _serializedList:
+        - Key: 10
+          Value: '"This ninja is a master of the dimensional art. He can send all
+            threats to another dimension by tapping 2 times on the screen. This ability
+            is charged after 5 dodges."'
+        - Key: 28
+          Value: "\"Esse ninja \xE9 mestre na arte dimensional. Ele consegue enviar
+            todas as amea\xE7as para outra dimens\xE3o clicando 2 vezes na tela.
+            Essa habilidade \xE9 carregada ap\xF3s 5 desvios.\""
+    - Key: ninja_description_mouse
+      Value:
+        _serializedList:
+        - Key: 10
+          Value: '"This ninja is a master of the wildlife art. He can turn into a
+            mouse by tapping 2 times on the screen. This ability is charged after
+            5 dodges. If the mouse spends 4 seconds without dodging, it returns to
+            its human form."'
+        - Key: 28
+          Value: "\"Esse ninja \xE9 mestre na arte selvagem. Ele consegue se transformar
+            num camundongo clicando 2 vezes na tela. Essa habilidade \xE9 carregada
+            ap\xF3s 5 desvios e cancelada caso o camundongo n\xE3o consiga desviar
+            por mais de 4 segundos.\""
+    - Key: ninja_description_teleport
+      Value:
+        _serializedList:
+        - Key: 10
+          Value: '"This ninja is a master of the shadow art. He can teleport to any
+            place by tapping on the screen 2 times. This ability is charged after
+            a single dodge."'
+        - Key: 28
+          Value: "\"Esse ninja \xE9 um mestre na arte sombria. Ele consegue se teleportar
+            para qualquer lugar clicando 2 vezes na tela. Essa habilidade \xE9 carregada
+            ap\xF3s um \xFAnico desvio.\""
+    - Key: select
+      Value:
+        _serializedList:
+        - Key: 10
+          Value: select
+        - Key: 28
+          Value: selecionar
+    - Key: selected
+      Value:
+        _serializedList:
+        - Key: 10
+          Value: selected
+        - Key: 28
+          Value: selecionado
+    - Key: back
+      Value:
+        _serializedList:
+        - Key: 10
+          Value: back
+        - Key: 28
+          Value: voltar
+    - Key: unlock_time
+      Value:
+        _serializedList:
+        - Key: 10
+          Value: 'unlock: {0} seconds {1} times'
+        - Key: 28
+          Value: 'liberar: {0} segundos {1} vezes'
+    - Key: unlock_ads_singular
+      Value:
+        _serializedList:
+        - Key: 10
+          Value: 'unlock: watch {0} ad'
+        - Key: 28
+          Value: 'liberar: assista {0} video'
+    - Key: unlock_ads_plural
+      Value:
+        _serializedList:
+        - Key: 10
+          Value: 'unlock: watch {0} ads'
+        - Key: 28
+          Value: 'liberar: assista {0} videos'
+    - Key: or
+      Value:
+        _serializedList:
+        - Key: 10
+          Value: or
+        - Key: 28
+          Value: ou
+    - Key: music_off
+      Value:
+        _serializedList:
+        - Key: 10
+          Value: music is off
+        - Key: 28
+          Value: "m\xFAsica desligada"
+    - Key: music_on
+      Value:
+        _serializedList:
+        - Key: 10
+          Value: music is on
+        - Key: 28
+          Value: "m\xFAsica ligada"
+    - Key: sounds_off
+      Value:
+        _serializedList:
+        - Key: 10
+          Value: sounds are off
+        - Key: 28
+          Value: sons desligados
+    - Key: sounds_on
+      Value:
+        _serializedList:
+        - Key: 10
+          Value: sounds are on
+        - Key: 28
+          Value: sons ligados
+    - Key: buy_no_ads
+      Value:
+        _serializedList:
+        - Key: 10
+          Value: remove ads
+        - Key: 28
+          Value: "remover an\xFAncios"
+    - Key: time_alive
+      Value:
+        _serializedList:
+        - Key: 10
+          Value: 'time alive: {0} seconds'
+        - Key: 28
+          Value: 'tempo vivo: {0} segundos'
+    - Key: new_highscore
+      Value:
+        _serializedList:
+        - Key: 10
+          Value: new highscore!\{0} seconds
+        - Key: 28
+          Value: novo record!\{0} segundos
+    - Key: ninjas_ahead
+      Value:
+        _serializedList:
+        - Key: 10
+          Value: there are {0} ninjas ahead of you
+        - Key: 28
+          Value: "ainda h\xE1 {0} ninjas na sua frente"
+    - Key: share
+      Value:
+        _serializedList:
+        - Key: 10
+          Value: share
+        - Key: 28
+          Value: compartilhar

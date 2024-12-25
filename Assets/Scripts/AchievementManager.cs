@@ -23,13 +23,14 @@ public class AchievementManager : MonoBehaviour
             var achievementItem = Instantiate(_achievementPrefab, _content);
             var progress = PlayerPrefs.GetInt(achievement.Key, 0);
             var completed = progress >= achievement.TargetProgress;
+            var description = LocalizationManager.Instance.GetLocalizedText(achievement.DescriptionLocKey);
             if (completed)
             {
-                achievementItem.Init(_completeSprite, achievement.Description, $"{achievement.TargetProgress}/{achievement.TargetProgress}");
+                achievementItem.Init(_completeSprite, description, $"{achievement.TargetProgress}/{achievement.TargetProgress}");
             }
             else
             {
-                achievementItem.Init(_incompleteSprite, achievement.Description, $"{progress}/{achievement.TargetProgress}");
+                achievementItem.Init(_incompleteSprite, description, $"{progress}/{achievement.TargetProgress}");
             }
         }
         

@@ -14,8 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ID: Boundless
   Name: Wallymaru
-  Description: '"This ninja is a master of the phantom art. He doesn''t leave trails
-    and can pass through walls."'
+  DescriptionLocKey: ninja_description_boundless
   AdsToUnlock: 0
   TimeToUnlock: 50
   RoundsToUnlock: 5
@@ -50,3 +49,5 @@ MonoBehaviour:
     m_NumColorKeys: 2
     m_NumAlphaKeys: 2
   Skill: 3
+  DodgesToChargeSkill: 0
+  SelectSound: {fileID: 8300000, guid: b93b5740afebfda4ca41bed0db39a86b, type: 3}

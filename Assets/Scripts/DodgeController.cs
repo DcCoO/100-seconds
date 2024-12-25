@@ -28,6 +28,7 @@ public class DodgeController : SingletonMonoBehaviour<DodgeController>
         _comboText.transform.localPosition = Vector3.zero;
         _comboCanvas.position = _player.position + _comboCanvasOffset;
         _comboText.text = $"x<b>{++_comboCount}</b>";
+        AudioManager.Instance.PlayDodge();
         EventController.Instance.Dodge(_comboCount);
     }
 

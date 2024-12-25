@@ -81,6 +81,7 @@ public class AchievementController : SingletonMonoBehaviour<AchievementControlle
     private void OnDodge(int combo)
     {
         UpdateAchievementProgress(EAchievementType.Dodge, 1);
+        UpdateAchievementProgress(EAchievementType.DodgeCombo, combo, true);
     }
     
     private void OnSkillUsed()

@@ -11,11 +11,14 @@ public class HUD : MonoBehaviour
     
     [SerializeField] private GameObject _gameOverPanel;
     [SerializeField] private TMP_Text _loseText;
+    [SerializeField] private LocalizedText _loseLocText;
+    
     [SerializeField] private string[] _losePhrases;
     
     [SerializeField] private TMP_Text _rankingText;
+    [SerializeField] private LocalizedText _rankingLocText;
     [SerializeField] private AnimationCurve _playersCurve;
-    private static readonly DateTime _beginDate = new DateTime(2024, 12, 14);
+    private static readonly DateTime _beginDate = new(2024, 12, 14);
     private const int _startUsers = 41593;
     private const float _newUsersPerSecond = 0.006f;
 
@@ -25,6 +28,7 @@ public class HUD : MonoBehaviour
     [SerializeField] private GameObject _gameWonPanel;
     
     [SerializeField] private TMP_Text _newHighscoreText;
+    [SerializeField] private LocalizedText _newHighscoreLocText;
     
     private void OnEnable()
     {
@@ -55,6 +59,7 @@ public class HUD : MonoBehaviour
     
     private void GameLost(int seconds, float exactTime)
     {
+        AudioManager.Instance.PlayEldest();
         _score = seconds;
         _gameOverPanel.SetActive(true);
         _loseText.text = $"\"{_losePhrases[Random.Range(0, _losePhrases.Length)]}\"";
@@ -62,19 +67,19 @@ public class HUD : MonoBehaviour
         float t = Mathf.Clamp(exactTime / 100f, 0f, 1f);
         float passedSecondsFromStartDate = (float)(DateTime.Now - _beginDate).TotalSeconds;
         int users = _startUsers + Mathf.RoundToInt(passedSecondsFromStartDate * _newUsersPerSecond);
-        _rankingText.text = $"there are {Mathf.RoundToInt(users * _playersCurve.Evaluate(t))} ninjas ahead of you";
+        int ninjasAhead = Mathf.Max(2, Mathf.RoundToInt(users * _playersCurve.Evaluate(t)));
+        _rankingLocText.RefreshParameters(0, ninjasAhead);
         
         _timeText.gameObject.SetActive(false);
-        if (seconds > PlayerPrefs.GetInt(Menu.HighscoreKey, 0))
+        if (seconds > PlayerPrefs.GetInt(Menu.HighscoreKey, 0) && seconds > 1)
         {
             PlayerPrefs.SetInt(Menu.HighscoreKey, seconds);
+            _newHighscoreLocText.RefreshParameters(1, seconds);
             
-            if (seconds == 1) _newHighscoreText.text = "New Highscore!\n1 second!";
-            else _newHighscoreText.text = $"New Highscore!\n{seconds} seconds!";
         }
         else
         {
-            _newHighscoreText.text = $"time alive: {seconds} seconds";
+            _newHighscoreLocText.RefreshParameters(0, seconds);
         }
     }
     
@@ -83,6 +88,8 @@ public class HUD : MonoBehaviour
         _score = 100;
         _gameWonPanel.SetActive(true);
         _timeText.gameObject.SetActive(false);
+        AudioManager.Instance.PlayWin();
+        AudioManager.Instance.PlayEldest();
         PlayerPrefs.SetInt(Menu.HighscoreKey, 100);
     }
     

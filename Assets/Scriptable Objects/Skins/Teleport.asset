@@ -14,9 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ID: Teleport
   Name: Skeeposuke
-  Description: '"This ninja is a master of the shadow art. He can teleport to any
-    place by tapping on the screen 2 times. This ability is charged after a single
-    dodge."'
+  DescriptionLocKey: ninja_description_teleport
   AdsToUnlock: 10
   TimeToUnlock: 60
   RoundsToUnlock: 4
@@ -52,3 +50,4 @@ MonoBehaviour:
     m_NumAlphaKeys: 2
   Skill: 2
   DodgesToChargeSkill: 1
+  SelectSound: {fileID: 8300000, guid: 16b2dc251af0dbb40a620d64fbeb52ed, type: 3}

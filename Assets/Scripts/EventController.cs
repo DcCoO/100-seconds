@@ -11,6 +11,10 @@ public class EventController : SingletonMonoBehaviour<EventController>
     public static event Action<int, float> OnGameLost;
     public static event Action OnGameWon;
     public static event Action OnAdWatched;
+    public static event Action<bool> OnMusicStateChanged;
+    public static event Action<bool> OnSFXStateChanged;
+    
+    
 
     public void StartGame()
     {
@@ -59,6 +63,16 @@ public class EventController : SingletonMonoBehaviour<EventController>
     public void SkillUsed()
     {
         OnSkillUsed?.Invoke();
+    }
+    
+    public void MusicStateChanged(bool state)
+    {
+        OnMusicStateChanged?.Invoke(state);
+    }
+    
+    public void SFXStateChanged(bool state)
+    {
+        OnSFXStateChanged?.Invoke(state);
     }
     
 #if UNITY_EDITOR

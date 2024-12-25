@@ -19,30 +19,29 @@ public class Ninjas : MonoBehaviour
     
     [SerializeField] private TMP_Text _textName;
     [SerializeField] private TMP_Text _textDescription;
-    [SerializeField] private GameObject _imageEldest;
 
     // Locked Panel
     [SerializeField] private GameObject _lockedPanel;
     [SerializeField] private TMP_Text _textUnlocked;
     [SerializeField] private TMP_Text _textUnlockedAds;
+    [SerializeField] private LocalizedText _locTextUnlocked;
+    [SerializeField] private LocalizedText _locTextUnlockedAds;
     [SerializeField] private Button _buttonWatchAd;
     
     // Unlocked Panel
     [SerializeField] private GameObject _unlockedPanel;
-    [SerializeField] private TMP_Text _textSelected;
+    [SerializeField] private LocalizedText _locTextSelect;
     [SerializeField] private Button _buttonSelected;
 
     [SerializeField] private Button _left;
     [SerializeField] private Button _right;
-
-    
     
     private void OnEnable()
     {
         var currentSkin = Menu.GetSelectedSkinID();
         _currentSkinIndex = Array.FindIndex(_skins, s => s.ID == currentSkin);
         _selectedSkinIndex = _currentSkinIndex;
-        UpdateScreen(_selectedSkinIndex, _selectedSkinIndex);
+        UpdateScreen(_currentSkinIndex, _selectedSkinIndex);
 
         AdsManager.OnAdReady += OnAdLoaded;
     }
@@ -66,16 +65,16 @@ public class Ninjas : MonoBehaviour
         if (available)
         {
             _textName.text = skinToShow.Name;
-            _textDescription.text = skinToShow.Description;
+            _textDescription.text = LocalizationManager.Instance.GetLocalizedText(skinToShow.DescriptionLocKey);
             
             if (selected)
             {
-                _textSelected.text = $"selected";
+                _locTextSelect.ChangeKey(1);
                 _buttonSelected.interactable = false;
             }
             else
             {
-                _textSelected.text = $"select";
+                _locTextSelect.ChangeKey(0);
                 _buttonSelected.interactable = true;
             }
         }
@@ -86,8 +85,13 @@ public class Ninjas : MonoBehaviour
             
             var roundsLeft = Menu.GetRoundsLeft(skin.ID);
             var adsLeft = Menu.GetAdsLeft(skin.ID);
-            _textUnlocked.text = $"unlock: {skin.TimeToUnlock} seconds {roundsLeft} {(roundsLeft == 1 ? "time" : "times")}";
-            _textUnlockedAds.text = $"unlock: watch {adsLeft} {(adsLeft == 1 ? "ad" : "ads")}";
+
+            _locTextUnlocked.RefreshParameters(0, skin.TimeToUnlock, roundsLeft);
+            _locTextUnlockedAds.RefreshParameters(adsLeft <= 1 ? 0 : 1, adsLeft);
+            
+            
+            //_textUnlocked.text = $"unlock: {skin.TimeToUnlock} seconds {roundsLeft} {(roundsLeft == 1 ? "time" : "times")}";
+            //_textUnlockedAds.text = $"unlock: watch {adsLeft} {(adsLeft == 1 ? "ad" : "ads")}";
             
             // Handle Ads
             bool adLoaded = AdsManager.Instance.IsRewardedAdLoaded();
@@ -124,10 +128,11 @@ public class Ninjas : MonoBehaviour
     {
         var skin = _skins[_currentSkinIndex].ID;
         Menu.SetSelectedSkinID(skin);
-        _textSelected.text = $"selected";
+        _locTextSelect.ChangeKey(1);
         _buttonSelected.interactable = false;
         _selectedSkinIndex = _currentSkinIndex;
         UpdateScreen(_currentSkinIndex, _selectedSkinIndex);
+        AudioManager.Instance.PlaySFX(_skins[_currentSkinIndex].SelectSound);
     }
 
     public void WatchAd()

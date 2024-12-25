@@ -14,9 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ID: Disabler
   Name: Buleh-kuhol
-  Description: '"This ninja is a master of the dimensional art. He can send all threats
-    to another dimension by tapping 2 times on the screen. This ability is charged
-    after 5 dodges."'
+  DescriptionLocKey: ninja_description_disabler
   AdsToUnlock: 20
   TimeToUnlock: 85
   RoundsToUnlock: 2
@@ -52,3 +50,4 @@ MonoBehaviour:
     m_NumAlphaKeys: 2
   Skill: 4
   DodgesToChargeSkill: 5
+  SelectSound: {fileID: 8300000, guid: 57b2ba38b7e79e8499e9993aacfe46d9, type: 3}
